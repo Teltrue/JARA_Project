@@ -17,7 +17,11 @@ function MovieCard({ movie }: { movie: Movie }) {
           <Button size="icon" className="bg-white text-black hover:bg-white/90">
             <Play />
           </Button>
-          <Button size="icon" variant="secondary" className="bg-white/20 text-white hover:bg-white/30">
+          <Button
+            size="icon"
+            variant="secondary"
+            className="bg-white/20 text-white hover:bg-white/30"
+          >
             <CirclePlus />
           </Button>
         </div>
@@ -26,7 +30,13 @@ function MovieCard({ movie }: { movie: Movie }) {
   );
 }
 
-export default function Row({ title, movies }: { title: string; movies: Movie[] }) {
+export default function Row({
+  title,
+  movies,
+}: {
+  title: string;
+  movies: Movie[];
+}) {
   const scrollerRef = useRef<HTMLDivElement>(null);
 
   const scroll = (dir: -1 | 1) => () => {
@@ -38,7 +48,9 @@ export default function Row({ title, movies }: { title: string; movies: Movie[] 
 
   return (
     <section className="relative">
-      <h2 className="px-4 sm:px-8 max-w-7xl mx-auto mb-3 text-lg sm:text-xl font-semibold">{title}</h2>
+      <h2 className="px-4 sm:px-8 max-w-7xl mx-auto mb-3 text-lg sm:text-xl font-semibold">
+        {title}
+      </h2>
       <div className="relative">
         <button
           aria-label="Scroll left"

@@ -17,7 +17,9 @@ export default function Dashboard() {
         </div>
         <div className="rounded-lg bg-white/5 p-5 ring-1 ring-white/10">
           <div className="text-white/70 text-sm">Quick Links</div>
-          <div className="mt-2 text-white/80">Create Page • New Payment Link</div>
+          <div className="mt-2 text-white/80">
+            Create Page • New Payment Link
+          </div>
         </div>
       </div>
     </Placeholder>
