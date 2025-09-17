@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useMemo, useState } from "react";
 import { featured } from "@/data/movies";
 import { Button } from "@/components/ui/button";
 import { Info, Play, Volume2, VolumeX } from "lucide-react";
@@ -11,40 +11,40 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const TRAILER_SRC =
-  "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4";
+const VIDEO_ID = "dBf8bDeWdP8";
 
 export default function HeroVideo() {
-  const videoRef = useRef<HTMLVideoElement | null>(null);
   const [muted, setMuted] = useState(true);
-
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    v.muted = muted;
-    const play = async () => {
-      try {
-        await v.play();
-      } catch {
-        // Autoplay might be blocked until user gesture; ignore
-      }
-    };
-    play();
+  const src = useMemo(() => {
+    const base = `https://www.youtube.com/embed/${VIDEO_ID}`;
+    const params = new URLSearchParams({
+      autoplay: "1",
+      mute: muted ? "1" : "0",
+      controls: "0",
+      rel: "0",
+      loop: "1",
+      playlist: VIDEO_ID,
+      modestbranding: "1",
+      playsinline: "1",
+      showinfo: "0",
+      iv_load_policy: "3",
+      disablekb: "1",
+      fs: "0",
+    });
+    return `${base}?${params.toString()}`;
   }, [muted]);
 
   return (
     <section className="relative aspect-[16/9] w-full">
-      <video
-        ref={videoRef}
-        className="absolute inset-0 h-full w-full object-cover"
-        src={TRAILER_SRC}
-        poster={featured.backdrop}
-        autoPlay
-        muted
-        loop
-        playsInline
-        preload="auto"
-      />
+      <div className="absolute inset-0">
+        <iframe
+          title="Hero trailer"
+          className="h-full w-full object-cover"
+          src={src}
+          allow="autoplay; encrypted-media; picture-in-picture"
+          allowFullScreen={false}
+        />
+      </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 h-full flex items-end pb-16">
