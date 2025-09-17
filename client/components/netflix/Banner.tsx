@@ -24,7 +24,7 @@ export default function Banner() {
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 h-full flex items-end pb-16">
         <div className="max-w-2xl">
           <h1 className="text-4xl sm:text-5xl font-extrabold drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">{m.title}</h1>
-          <p className="mt-3 text-white/80 line-clamp-3">{m.overview}</p>
+          <p className="mt-3 text-white/80">{m.overview}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Button variant="secondary" className="bg-white text-black hover:bg-white/90">
               <Play className="mr-2" /> Play
