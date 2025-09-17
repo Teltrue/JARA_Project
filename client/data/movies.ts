@@ -15,9 +15,9 @@ const u = (id: string, w = 1200) =>
 
 export const featured: Movie = {
   id: "ftd-1",
-  title: "Arcadia",
+  title: "30 Days in Atlanta",
   overview:
-    "In a world rebuilt from ash, a lone courier uncovers a secret that could unite the fractured city-states—or end them for good.",
+    "When Akpos manages to bag a prize that includes a thirty-day trip to the American city of Atlanta, he decides to take his cousin along. Hilarity soon follows suit.",
   year: 2025,
   rating: "PG-13",
   duration: "2h 06m",
