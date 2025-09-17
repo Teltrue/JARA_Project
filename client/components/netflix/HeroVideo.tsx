@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { featured } from "@/data/movies";
 import { Button } from "@/components/ui/button";
 import { Info, Play, Volume2, VolumeX } from "lucide-react";
@@ -11,17 +11,15 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const VIDEO_ID = "dBf8bDeWdP8"; // YouTube fallback
-const TRAILER_MP4 = (import.meta as any).env?.VITE_TRAILER_URL as
-  | string
-  | undefined;
+// Use attached MP4 directly and remove YouTube entirely
+const TRAILER_MP4 =
+  "https://cdn.builder.io/o/assets%2F7bab73eb198743608d045e816206e386%2F4a76aaa90f8347029435424a715e4db6?alt=media&token=c5e46416-acad-472b-ac2b-5a744d1dd7bb&apiKey=7bab73eb198743608d045e816206e386";
 
 export default function HeroVideo() {
   const [muted, setMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    if (!TRAILER_MP4) return;
     const v = videoRef.current;
     if (!v) return;
     v.muted = muted;
@@ -29,55 +27,26 @@ export default function HeroVideo() {
       try {
         await v.play();
       } catch {
-        /* autoplay may require gesture on some browsers */
+        /* Some browsers block autoplay without user gesture */
       }
     };
     play();
   }, [muted]);
 
-  const ytSrc = useMemo(() => {
-    const base = `https://www.youtube.com/embed/${VIDEO_ID}`;
-    const params = new URLSearchParams({
-      autoplay: "1",
-      mute: muted ? "1" : "0",
-      controls: "0",
-      rel: "0",
-      loop: "1",
-      playlist: VIDEO_ID,
-      modestbranding: "1",
-      playsinline: "1",
-      showinfo: "0",
-      iv_load_policy: "3",
-      disablekb: "1",
-      fs: "0",
-    });
-    return `${base}?${params.toString()}`;
-  }, [muted]);
-
   return (
     <section className="relative aspect-[16/9] w-full">
       <div className="absolute inset-0">
-        {TRAILER_MP4 ? (
-          <video
-            ref={videoRef}
-            className="h-full w-full object-cover"
-            src={TRAILER_MP4}
-            poster={featured.backdrop}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-          />
-        ) : (
-          <iframe
-            title="Hero trailer"
-            className="h-full w-full object-cover"
-            src={ytSrc}
-            allow="autoplay; encrypted-media; picture-in-picture"
-            allowFullScreen={false}
-          />
-        )}
+        <video
+          ref={videoRef}
+          className="h-full w-full object-cover"
+          src={TRAILER_MP4}
+          poster={featured.backdrop}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10" />
 
