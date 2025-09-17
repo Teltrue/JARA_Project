@@ -22,15 +22,15 @@ export default function SiteHeader() {
     >
       <div className="px-4 sm:px-8 max-w-7xl mx-auto h-16 flex items-center gap-6">
         <Link to="/" className="flex items-center gap-2 shrink-0">
-          <span className="inline-block h-6 w-6 bg-primary rotate-12 shadow-[0_0_20px_rgba(229,9,20,0.8)]" />
-          <span className="font-extrabold tracking-wider text-white text-lg hidden sm:inline">NETFLIX</span>
+          <span className="inline-block h-6 w-6 bg-primary rotate-12" />
+          <span className="font-extrabold tracking-wider text-white text-lg hidden sm:inline">JARA</span>
         </Link>
         <nav className="hidden md:flex items-center gap-4 text-sm text-white/80">
           <Link to="/" className="hover:text-white transition-colors">Home</Link>
-          <span className="cursor-default text-white/60">TV Shows</span>
-          <span className="cursor-default text-white/60">Movies</span>
-          <span className="cursor-default text-white/60">New & Popular</span>
-          <span className="cursor-default text-white/60">My List</span>
+          <Link to="/dashboard" className="hover:text-white transition-colors">Dashboard</Link>
+          <Link to="/pages" className="hover:text-white transition-colors">Pages</Link>
+          <Link to="/payment-links" className="hover:text-white transition-colors">Payment Links</Link>
+          <Link to="/ai" className="hover:text-white transition-colors">AI</Link>
         </nav>
         <div className="ml-auto flex items-center gap-4">
           <button aria-label="Search" className="text-white/80 hover:text-white">
