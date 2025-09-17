@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { featured } from "@/data/movies";
 import { Button } from "@/components/ui/button";
 import { Info, Play, Volume2, VolumeX } from "lucide-react";
@@ -11,11 +11,29 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const VIDEO_ID = "dBf8bDeWdP8";
+const VIDEO_ID = "dBf8bDeWdP8"; // YouTube fallback
+const TRAILER_MP4 = (import.meta as any).env?.VITE_TRAILER_URL as string | undefined;
 
 export default function HeroVideo() {
   const [muted, setMuted] = useState(true);
-  const src = useMemo(() => {
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+
+  useEffect(() => {
+    if (!TRAILER_MP4) return;
+    const v = videoRef.current;
+    if (!v) return;
+    v.muted = muted;
+    const play = async () => {
+      try {
+        await v.play();
+      } catch {
+        /* autoplay may require gesture on some browsers */
+      }
+    };
+    play();
+  }, [muted]);
+
+  const ytSrc = useMemo(() => {
     const base = `https://www.youtube.com/embed/${VIDEO_ID}`;
     const params = new URLSearchParams({
       autoplay: "1",
@@ -37,13 +55,27 @@ export default function HeroVideo() {
   return (
     <section className="relative aspect-[16/9] w-full">
       <div className="absolute inset-0">
-        <iframe
-          title="Hero trailer"
-          className="h-full w-full object-cover"
-          src={src}
-          allow="autoplay; encrypted-media; picture-in-picture"
-          allowFullScreen={false}
-        />
+        {TRAILER_MP4 ? (
+          <video
+            ref={videoRef}
+            className="h-full w-full object-cover"
+            src={TRAILER_MP4}
+            poster={featured.backdrop}
+            autoPlay
+            muted
+            loop
+            playsInline
+            preload="auto"
+          />
+        ) : (
+          <iframe
+            title="Hero trailer"
+            className="h-full w-full object-cover"
+            src={ytSrc}
+            allow="autoplay; encrypted-media; picture-in-picture"
+            allowFullScreen={false}
+          />
+        )}
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10" />
 
