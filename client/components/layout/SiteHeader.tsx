@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
-import { Search, Bell } from "lucide-react";
+import { Search, Bell, Menu, User } from "lucide-react";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import { featured, rows } from "@/data/movies";
 
 export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
@@ -23,6 +26,53 @@ export default function SiteHeader() {
       )}
     >
       <div className="px-4 sm:px-8 max-w-7xl mx-auto h-16 flex items-center gap-6">
+        <Sheet>
+          <SheetTrigger asChild>
+            <button aria-label="Open menu" className="text-white/80 hover:text-white">
+              <Menu className="h-6 w-6" />
+            </button>
+          </SheetTrigger>
+          <SheetContent side="left" className="w-80 sm:w-96 p-0 bg-neutral-950 text-white border-white/10">
+            <div className="p-4 border-b border-white/10">
+              <Command>
+                <CommandInput placeholder="Search movies..." />
+                <CommandList className="max-h-[50vh]">
+                  <CommandEmpty>No results found.</CommandEmpty>
+                  <CommandGroup heading="Movies">
+                    {[featured, ...rows.flatMap((r) => r.movies)].map((m) => (
+                      <CommandItem key={m.id} value={m.title} className="gap-2">
+                        <img src={m.poster} alt="" className="h-8 w-6 object-cover rounded" />
+                        <span className="truncate">{m.title}</span>
+                        {m.year ? <span className="ml-auto text-white/50 text-xs">{m.year}</span> : null}
+                      </CommandItem>
+                    ))}
+                  </CommandGroup>
+                </CommandList>
+              </Command>
+            </div>
+            <div className="p-4 space-y-3">
+              <div className="text-xs uppercase tracking-wide text-white/60">Accounts</div>
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 rounded bg-white/10 ring-1 ring-white/20 grid place-items-center">
+                  <User className="h-4 w-4" />
+                </div>
+                <div>
+                  <div className="text-sm">Samuel</div>
+                  <div className="text-white/50 text-xs">Owner</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <div className="h-8 w-8 rounded bg-white/10 ring-1 ring-white/20 grid place-items-center">
+                  <User className="h-4 w-4" />
+                </div>
+                <div>
+                  <div className="text-sm">Kids</div>
+                  <div className="text-white/50 text-xs">Profile</div>
+                </div>
+              </div>
+            </div>
+          </SheetContent>
+        </Sheet>
         <Link to="/" className="flex items-center gap-2 shrink-0">
           <span className="inline-block h-6 w-6 bg-primary rotate-12" />
           <span className="font-extrabold tracking-wider text-white text-lg hidden sm:inline">
