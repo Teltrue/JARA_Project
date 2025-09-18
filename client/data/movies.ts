@@ -8,6 +8,7 @@ export type Movie = {
   poster: string; // portrait
   backdrop: string; // landscape
   genres?: string[];
+  trailer?: string; // local video path like /trailers/<id>.mp4
 };
 
 const u = (id: string, w = 1200) =>
