@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { featured } from "@/data/movies";
 import { Button } from "@/components/ui/button";
 import { Info, Play, Volume2, VolumeX } from "lucide-react";
@@ -11,10 +11,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 
-const VIDEO_ID = "dBf8bDeWdP8"; // YouTube fallback
-const TRAILER_MP4 = (import.meta as any).env?.VITE_TRAILER_URL as
-  | string
-  | undefined;
+const TRAILER_MP4 = "/videos/trailer1.mp4";
 
 export default function HeroVideo() {
   const [muted, setMuted] = useState(true);
@@ -35,29 +32,10 @@ export default function HeroVideo() {
     play();
   }, [muted]);
 
-  const ytSrc = useMemo(() => {
-    const base = `https://www.youtube.com/embed/${VIDEO_ID}`;
-    const params = new URLSearchParams({
-      autoplay: "1",
-      mute: muted ? "1" : "0",
-      controls: "0",
-      rel: "0",
-      loop: "1",
-      playlist: VIDEO_ID,
-      modestbranding: "1",
-      playsinline: "1",
-      showinfo: "0",
-      iv_load_policy: "3",
-      disablekb: "1",
-      fs: "0",
-    });
-    return `${base}?${params.toString()}`;
-  }, [muted]);
 
   return (
-    <section className="relative aspect-[16/9] w-full">
+    <section className="relative w-full h-[60vh] min-h-[420px] max-h-[70vh] overflow-hidden">
       <div className="absolute inset-0">
-        {TRAILER_MP4 ? (
           <video
             ref={videoRef}
             className="h-full w-full object-cover"
@@ -69,15 +47,6 @@ export default function HeroVideo() {
             playsInline
             preload="auto"
           />
-        ) : (
-          <iframe
-            title="Hero trailer"
-            className="h-full w-full object-cover"
-            src={ytSrc}
-            allow="autoplay; encrypted-media; picture-in-picture"
-            allowFullScreen={false}
-          />
-        )}
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10" />
 
