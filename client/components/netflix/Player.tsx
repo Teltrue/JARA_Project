@@ -1,4 +1,4 @@
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
 
 export interface PlayerProps {
   open: boolean;
@@ -12,6 +12,7 @@ export default function Player({ open, onOpenChange, title, src, poster }: Playe
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="left-0 top-0 translate-x-0 translate-y-0 w-screen h-screen max-w-none p-0 bg-black border-0 rounded-none">
+        <DialogTitle className="sr-only">{title}</DialogTitle>
         <div className="relative w-full h-full bg-black">
           <video
             src={src}
