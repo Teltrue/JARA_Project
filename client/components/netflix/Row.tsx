@@ -3,7 +3,7 @@ import type { Movie } from "@/data/movies";
 import { ChevronLeft, ChevronRight, CirclePlus, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-function MovieCard({ movie }: { movie: Movie }) {
+function MovieCard({ movie, onPlay }: { movie: Movie; onPlay: (m: Movie) => void }) {
   return (
     <div className="group relative aspect-[2/3] w-40 sm:w-44 md:w-48 shrink-0 rounded overflow-hidden">
       <img
