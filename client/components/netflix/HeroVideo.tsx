@@ -37,11 +37,11 @@ export default function HeroVideo() {
 
 
   return (
-    <section className="relative w-full h-[60vh] min-h-[420px] max-h-[70vh] overflow-hidden">
+    <section className="relative w-full h-[55vh] sm:h-[60vh] md:h-[70vh] min-h-[360px] max-h-[80vh] overflow-hidden">
       <div className="absolute inset-0">
           <video
             ref={videoRef}
-            className="h-full w-full object-contain object-center bg-black"
+            className="h-full w-full object-cover object-center bg-black"
             src={TRAILER_MP4}
             poster={featured.backdrop}
             autoPlay
@@ -53,12 +53,12 @@ export default function HeroVideo() {
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10" />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 h-full flex items-end pb-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-8 h-full flex items-end pb-8 sm:pb-12 md:pb-16">
         <div className="max-w-2xl">
-          <h1 className="text-4xl sm:text-5xl font-extrabold drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
+          <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
             {featured.title}
           </h1>
-          <p className="mt-3 text-white/80">{featured.overview}</p>
+          <p className="mt-3 text-white/80 hidden sm:block md:line-clamp-3">{featured.overview}</p>
           <div className="mt-6 flex flex-wrap gap-3 items-center">
             <Button
               variant="secondary"
