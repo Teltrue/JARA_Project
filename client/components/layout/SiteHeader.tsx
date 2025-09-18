@@ -61,6 +61,16 @@ export default function SiteHeader() {
                 </CommandList>
               </Command>
             </div>
+            <div className="p-4 border-b border-white/10 space-y-2">
+              <div className="text-xs uppercase tracking-wide text-white/60">Navigation</div>
+              <nav className="grid">
+                <Link to="/" onClick={() => setMenuOpen(false)} className="px-2 py-2 rounded hover:bg-white/5">Home</Link>
+                <Link to="/dashboard" onClick={() => setMenuOpen(false)} className="px-2 py-2 rounded hover:bg-white/5">Dashboard</Link>
+                <Link to="/pages" onClick={() => setMenuOpen(false)} className="px-2 py-2 rounded hover:bg-white/5">Pages</Link>
+                <Link to="/payment-links" onClick={() => setMenuOpen(false)} className="px-2 py-2 rounded hover:bg-white/5">Payment Links</Link>
+                <Link to="/ai" onClick={() => setMenuOpen(false)} className="px-2 py-2 rounded hover:bg-white/5">AI</Link>
+              </nav>
+            </div>
             <div className="p-4 space-y-3">
               <div className="text-xs uppercase tracking-wide text-white/60">Accounts</div>
               <div className="flex items-center gap-3">
