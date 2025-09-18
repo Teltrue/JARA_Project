@@ -13,6 +13,8 @@ import {
 
 const TRAILER_MP4 = "/videos/trailer1.mp4";
 
+import Player from "./Player";
+
 export default function HeroVideo() {
   const [muted, setMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
