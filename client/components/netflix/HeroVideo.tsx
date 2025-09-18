@@ -20,6 +20,17 @@ export default function HeroVideo() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [showPlayer, setShowPlayer] = useState(false);
 
+  // Pause autoplay preview when player opens; resume when closed
+  useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return;
+    if (showPlayer) {
+      try { v.pause(); } catch {}
+    } else {
+      try { v.play(); } catch {}
+    }
+  }, [showPlayer]);
+
   useEffect(() => {
     if (!TRAILER_MP4) return;
     const v = videoRef.current;
