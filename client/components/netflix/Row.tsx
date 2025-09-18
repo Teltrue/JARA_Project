@@ -14,7 +14,7 @@ function MovieCard({ movie, onPlay }: { movie: Movie; onPlay: (m: Movie) => void
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/10 opacity-0 group-hover:opacity-100 transition-opacity" />
       <div className="absolute inset-x-2 bottom-2 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
         <div className="flex gap-2">
-          <Button size="icon" className="bg-white text-black hover:bg-white/90">
+          <Button size="icon" className="bg-white text-black hover:bg-white/90" onClick={() => onPlay(movie)}>
             <Play />
           </Button>
           <Button
