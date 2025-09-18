@@ -117,7 +117,9 @@
   }
 
   /* Globally hide all scrollbars while preserving scroll */
-  html, body, * {
+  html,
+  body,
+  * {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
@@ -128,7 +130,8 @@
   }
 
   /* Prevent horizontal scrollbars globally */
-  html, body {
+  html,
+  body {
     overflow-x: hidden;
   }
 }

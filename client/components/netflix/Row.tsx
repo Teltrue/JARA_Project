@@ -3,7 +3,13 @@ import type { Movie } from "@/data/movies";
 import { ChevronLeft, ChevronRight, CirclePlus, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-function MovieCard({ movie, onPlay }: { movie: Movie; onPlay: (m: Movie) => void }) {
+function MovieCard({
+  movie,
+  onPlay,
+}: {
+  movie: Movie;
+  onPlay: (m: Movie) => void;
+}) {
   return (
     <div className="group relative aspect-[2/3] w-40 sm:w-44 md:w-48 shrink-0 rounded overflow-hidden">
       <img
@@ -14,7 +20,11 @@ function MovieCard({ movie, onPlay }: { movie: Movie; onPlay: (m: Movie) => void
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/10 opacity-0 group-hover:opacity-100 transition-opacity" />
       <div className="absolute inset-x-2 bottom-2 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity">
         <div className="flex gap-2">
-          <Button size="icon" className="bg-white text-black hover:bg-white/90" onClick={() => onPlay(movie)}>
+          <Button
+            size="icon"
+            className="bg-white text-black hover:bg-white/90"
+            onClick={() => onPlay(movie)}
+          >
             <Play />
           </Button>
           <Button

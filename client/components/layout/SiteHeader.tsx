@@ -3,7 +3,14 @@ import { Link } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Search, Bell, Menu, User } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 import { featured, rows } from "@/data/movies";
 
 export default function SiteHeader() {
@@ -39,11 +46,17 @@ export default function SiteHeader() {
       <div className="px-4 sm:px-8 max-w-7xl mx-auto h-16 flex items-center gap-6">
         <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
           <SheetTrigger asChild>
-            <button aria-label="Open menu" className="text-white/80 hover:text-white">
+            <button
+              aria-label="Open menu"
+              className="text-white/80 hover:text-white"
+            >
               <Menu className="h-6 w-6" />
             </button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-80 sm:w-96 p-0 bg-neutral-950 text-white border-white/10 overflow-y-auto overscroll-contain">
+          <SheetContent
+            side="left"
+            className="w-80 sm:w-96 p-0 bg-neutral-950 text-white border-white/10 overflow-y-auto overscroll-contain"
+          >
             <div className="p-4 border-b border-white/10">
               <Command>
                 <CommandInput placeholder="Search movies..." />
@@ -52,9 +65,17 @@ export default function SiteHeader() {
                   <CommandGroup heading="Movies">
                     {[featured, ...rows.flatMap((r) => r.movies)].map((m) => (
                       <CommandItem key={m.id} value={m.title} className="gap-2">
-                        <img src={m.poster} alt="" className="h-8 w-6 object-cover rounded" />
+                        <img
+                          src={m.poster}
+                          alt=""
+                          className="h-8 w-6 object-cover rounded"
+                        />
                         <span className="truncate">{m.title}</span>
-                        {m.year ? <span className="ml-auto text-white/50 text-xs">{m.year}</span> : null}
+                        {m.year ? (
+                          <span className="ml-auto text-white/50 text-xs">
+                            {m.year}
+                          </span>
+                        ) : null}
                       </CommandItem>
                     ))}
                   </CommandGroup>
@@ -62,17 +83,51 @@ export default function SiteHeader() {
               </Command>
             </div>
             <div className="p-4 border-b border-white/10 space-y-2">
-              <div className="text-xs uppercase tracking-wide text-white/60">Navigation</div>
+              <div className="text-xs uppercase tracking-wide text-white/60">
+                Navigation
+              </div>
               <nav className="grid">
-                <Link to="/" onClick={() => setMenuOpen(false)} className="px-2 py-2 rounded hover:bg-white/5">Home</Link>
-                <Link to="/dashboard" onClick={() => setMenuOpen(false)} className="px-2 py-2 rounded hover:bg-white/5">Dashboard</Link>
-                <Link to="/pages" onClick={() => setMenuOpen(false)} className="px-2 py-2 rounded hover:bg-white/5">Pages</Link>
-                <Link to="/payment-links" onClick={() => setMenuOpen(false)} className="px-2 py-2 rounded hover:bg-white/5">Payment Links</Link>
-                <Link to="/ai" onClick={() => setMenuOpen(false)} className="px-2 py-2 rounded hover:bg-white/5">AI</Link>
+                <Link
+                  to="/"
+                  onClick={() => setMenuOpen(false)}
+                  className="px-2 py-2 rounded hover:bg-white/5"
+                >
+                  Home
+                </Link>
+                <Link
+                  to="/dashboard"
+                  onClick={() => setMenuOpen(false)}
+                  className="px-2 py-2 rounded hover:bg-white/5"
+                >
+                  Dashboard
+                </Link>
+                <Link
+                  to="/pages"
+                  onClick={() => setMenuOpen(false)}
+                  className="px-2 py-2 rounded hover:bg-white/5"
+                >
+                  Pages
+                </Link>
+                <Link
+                  to="/payment-links"
+                  onClick={() => setMenuOpen(false)}
+                  className="px-2 py-2 rounded hover:bg-white/5"
+                >
+                  Payment Links
+                </Link>
+                <Link
+                  to="/ai"
+                  onClick={() => setMenuOpen(false)}
+                  className="px-2 py-2 rounded hover:bg-white/5"
+                >
+                  AI
+                </Link>
               </nav>
             </div>
             <div className="p-4 space-y-3">
-              <div className="text-xs uppercase tracking-wide text-white/60">Accounts</div>
+              <div className="text-xs uppercase tracking-wide text-white/60">
+                Accounts
+              </div>
               <div className="flex items-center gap-3">
                 <div className="h-8 w-8 rounded bg-white/10 ring-1 ring-white/20 grid place-items-center">
                   <User className="h-4 w-4" />

@@ -25,9 +25,13 @@ export default function HeroVideo() {
     const v = videoRef.current;
     if (!v) return;
     if (showPlayer) {
-      try { v.pause(); } catch {}
+      try {
+        v.pause();
+      } catch {}
     } else {
-      try { v.play(); } catch {}
+      try {
+        v.play();
+      } catch {}
     }
   }, [showPlayer]);
 
@@ -46,21 +50,20 @@ export default function HeroVideo() {
     play();
   }, [muted]);
 
-
   return (
     <section className="relative w-full h-[55vh] sm:h-[60vh] md:h-[70vh] min-h-[360px] max-h-[80vh] overflow-hidden">
       <div className="absolute inset-0">
-          <video
-            ref={videoRef}
-            className="h-full w-full object-cover object-center bg-black"
-            src={TRAILER_MP4}
-            poster={featured.backdrop}
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="auto"
-          />
+        <video
+          ref={videoRef}
+          className="h-full w-full object-cover object-center bg-black"
+          src={TRAILER_MP4}
+          poster={featured.backdrop}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+        />
       </div>
       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-black/10" />
 
@@ -69,7 +72,9 @@ export default function HeroVideo() {
           <h1 className="text-2xl sm:text-4xl md:text-5xl font-extrabold drop-shadow-[0_2px_10px_rgba(0,0,0,0.6)]">
             {featured.title}
           </h1>
-          <p className="mt-3 text-white/80 hidden sm:block md:line-clamp-3">{featured.overview}</p>
+          <p className="mt-3 text-white/80 hidden sm:block md:line-clamp-3">
+            {featured.overview}
+          </p>
           <div className="mt-6 flex flex-wrap gap-3 items-center">
             <Button
               variant="secondary"
