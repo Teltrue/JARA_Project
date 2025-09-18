@@ -60,6 +60,7 @@ export default function HeroVideo() {
             <Button
               variant="secondary"
               className="bg-white text-black hover:bg-white/90"
+              onClick={() => setShowPlayer(true)}
             >
               <Play className="mr-2" /> Play
             </Button>
