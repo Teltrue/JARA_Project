@@ -30,6 +30,10 @@ function MovieCard({ movie, onPlay }: { movie: Movie; onPlay: (m: Movie) => void
   );
 }
 
+import Player from "./Player";
+import { useState } from "react";
+import { toast } from "sonner";
+
 export default function Row({
   title,
   movies,
@@ -38,6 +42,17 @@ export default function Row({
   movies: Movie[];
 }) {
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const [current, setCurrent] = useState<Movie | null>(null);
+  const [open, setOpen] = useState(false);
+
+  const handlePlay = (m: Movie) => {
+    if (!m.trailer) {
+      toast.error("No video available for this title yet.");
+      return;
+    }
+    setCurrent(m);
+    setOpen(true);
+  };
 
   const scroll = (dir: -1 | 1) => () => {
     const el = scrollerRef.current;
@@ -64,7 +79,7 @@ export default function Row({
           className="no-scrollbar pl-4 sm:pl-8 max-w-7xl mx-auto flex gap-3 overflow-x-auto scroll-smooth"
         >
           {movies.map((m) => (
-            <MovieCard key={m.id} movie={m} />
+            <MovieCard key={m.id} movie={m} onPlay={handlePlay} />
           ))}
         </div>
         <button
@@ -75,6 +90,15 @@ export default function Row({
           <ChevronRight />
         </button>
       </div>
+      {current?.trailer ? (
+        <Player
+          open={open}
+          onOpenChange={setOpen}
+          title={current.title}
+          src={current.trailer}
+          poster={current.backdrop}
+        />
+      ) : null}
     </section>
   );
 }
