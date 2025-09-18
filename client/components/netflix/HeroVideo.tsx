@@ -38,7 +38,7 @@ export default function HeroVideo() {
       <div className="absolute inset-0">
           <video
             ref={videoRef}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain object-center bg-black"
             src={TRAILER_MP4}
             poster={featured.backdrop}
             autoPlay
