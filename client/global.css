@@ -115,4 +115,20 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  /* Globally hide all scrollbars while preserving scroll */
+  html, body, * {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  *::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    display: none; /* Safari and Chrome */
+  }
+
+  /* Prevent horizontal scrollbars globally */
+  html, body {
+    overflow-x: hidden;
+  }
 }
