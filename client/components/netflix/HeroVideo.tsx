@@ -18,6 +18,7 @@ import Player from "./Player";
 export default function HeroVideo() {
   const [muted, setMuted] = useState(true);
   const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [showPlayer, setShowPlayer] = useState(false);
 
   useEffect(() => {
     if (!TRAILER_MP4) return;
@@ -108,6 +109,15 @@ export default function HeroVideo() {
           </div>
         </div>
       </div>
+      {TRAILER_MP4 ? (
+        <Player
+          open={showPlayer}
+          onOpenChange={setShowPlayer}
+          title={featured.title}
+          src={TRAILER_MP4}
+          poster={featured.backdrop}
+        />
+      ) : null}
     </section>
   );
 }
