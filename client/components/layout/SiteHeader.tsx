@@ -8,6 +8,7 @@ import { featured, rows } from "@/data/movies";
 
 export default function SiteHeader() {
   const [scrolled, setScrolled] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10);
@@ -15,6 +16,16 @@ export default function SiteHeader() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useEffect(() => {
+    if (menuOpen) {
+      const prev = document.body.style.overflow;
+      document.body.style.overflow = "hidden";
+      return () => {
+        document.body.style.overflow = prev;
+      };
+    }
+  }, [menuOpen]);
 
   return (
     <header
@@ -26,13 +37,13 @@ export default function SiteHeader() {
       )}
     >
       <div className="px-4 sm:px-8 max-w-7xl mx-auto h-16 flex items-center gap-6">
-        <Sheet>
+        <Sheet open={menuOpen} onOpenChange={setMenuOpen}>
           <SheetTrigger asChild>
             <button aria-label="Open menu" className="text-white/80 hover:text-white">
               <Menu className="h-6 w-6" />
             </button>
           </SheetTrigger>
-          <SheetContent side="left" className="w-80 sm:w-96 p-0 bg-neutral-950 text-white border-white/10">
+          <SheetContent side="left" className="w-80 sm:w-96 p-0 bg-neutral-950 text-white border-white/10 overflow-y-auto overscroll-contain">
             <div className="p-4 border-b border-white/10">
               <Command>
                 <CommandInput placeholder="Search movies..." />
